@@ -6,7 +6,6 @@ This is essentially a dummy basis which just uses raw, unaltered features.
 from warnings import warn
 
 from numpy import identity
-import numpy as np
 from sklearn.base import BaseEstimator
 from sklearn.utils import check_array
 
@@ -53,8 +52,6 @@ class Identity(BaseEstimator, InvertibleBasis, MatrixMixin):
         -------
         self : instance
         """
-        # Store original data
-        self.original_data = X
         # Note that we take a transpose here, so columns correspond to examples
         if self.n_basis_modes is None:
             self.basis_matrix_ = check_array(X).T.copy()
