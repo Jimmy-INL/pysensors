@@ -67,10 +67,10 @@ class Identity(BaseEstimator, InvertibleBasis, MatrixMixin):
                     )
                 )
 
-            self.basis_matrix_ = np.eye(X.shape[1])[:,:self.n_basis_modes] #check_array(X)[: self.n_basis_modes, :].T.copy()
+            self.basis_matrix_ = check_array(X)[: self.n_basis_modes, :].T.copy()
 
-            # if self.n_basis_modes < X.shape[0]:
-            #     warn(f"Only the first {self.n_basis_modes} examples were retained.")
+            if self.n_basis_modes < X.shape[0]:
+                warn(f"Only the first {self.n_basis_modes} examples were retained.")
         return self
 
     def matrix_inverse(self, n_basis_modes=None):
