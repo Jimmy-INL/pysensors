@@ -6,11 +6,7 @@ from ._base import MatrixMixin
 
 class Custom(InvertibleBasis, MatrixMixin):
     """
-<<<<<<< HEAD
     Use a custom transformation to maps input features to
-=======
-    Generate a custom transformation which maps input features to
->>>>>>> 1ccd23fafed0ca39dac6cde204efa228d133df1c
     custom modes.
 
     Assumes the data has already been centered (to have mean 0).
@@ -32,7 +28,7 @@ class Custom(InvertibleBasis, MatrixMixin):
 
     def __init__(self, U, n_basis_modes=10, **kwargs):
         if isinstance(n_basis_modes, int) and n_basis_modes > 0:
-            super(Custom, self).__init__()#n_components=n_basis_modes, **kwargs
+            super(Custom, self).__init__()
             self._n_basis_modes = n_basis_modes
             self.custom_basis_ = U
         else:
@@ -49,13 +45,7 @@ class Custom(InvertibleBasis, MatrixMixin):
         -------
         self : instance
         """
-        # self.basis_matrix_ = self.custom_basis_[:,: self.n_basis_modes] @ self.custom_basis_[:,: self.n_basis_modes].T @ X[: self.n_basis_modes, :].T.copy()
-        # self.basis_matrix_ = self.custom_basis_ @ self.custom_basis_.T @ X[: self.n_basis_modes, :].T.copy()
         self.basis_matrix_ = self.custom_basis_[:,:self.n_basis_modes]
-        # self.basis_matrix_ = (X @ self.custom_basis_[:,:self.n_basis_modes] @ self.custom_basis_[:,:self.n_basis_modes].T)[:self.n_basis_modes,:].T
-
-        # self.basis_matrix_ = ((X @ self.custom_basis_).T)[:,:self.n_basis_modes]
-        # self.basis_matrix_ = ((X @ self.custom_basis_ @ self.custom_basis_.T).T)[:,:self.n_basis_modes]
         return self
 
     def matrix_inverse(self, n_basis_modes=None):
