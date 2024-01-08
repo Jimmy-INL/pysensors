@@ -4,6 +4,7 @@ Various utility functions for mapping constrained sensors locations with the col
 """
 
 import numpy as np
+import pandas as pd
 
 
 def get_constraind_sensors_indices(x_min, x_max, y_min, y_max, nx, ny, all_sensors):
@@ -70,3 +71,11 @@ def get_constrained_sensors_indices_linear(x_min, x_max, y_min, y_max,df):
         if (x[i] >= x_min and x[i] <= x_max) and (y[i] >= y_min and y[i] <= y_max):
             idx_constrained.append(i)
     return idx_constrained
+
+def get_coordinates_from_indices(idx,shape):
+    if isinstance(shape,tuple):
+        return np.unravel_index(idx,shape,'F')
+    elif isinstance(shape,pd.DataFrame):
+        x = shape.loc[idx,'X (m)']
+        y = shape.loc[idx,'Y (m)']
+        return (x,y)
